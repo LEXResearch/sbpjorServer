@@ -16,5 +16,7 @@ python_version = "3.6"
 django-heroku = "*"
 gunicorn = "*"
 djangorestframework = "*"
+djangorestframework-jwt = "*"
+
 
 [dev-packages]
