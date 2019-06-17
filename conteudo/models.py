@@ -25,7 +25,7 @@ class CategoriaAtividade(models.Model):
 class Cronograma(models.Model):
     titulo = models.CharField(max_length=250)
     data = models.DateTimeField()
-    is_active = models.BooleanField()
+    is_active = models.BooleanField() # check if fields implemented
 
     def __str__(self):
         return self.titulo

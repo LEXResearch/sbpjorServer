@@ -31,4 +31,4 @@ class Contato(models.Model):
     data = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.nome + " " + self.data
+        return self.assunto + " enviado " + self.user.username

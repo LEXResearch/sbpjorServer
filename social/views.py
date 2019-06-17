@@ -2,7 +2,7 @@ import os
 
 from django.core.mail import send_mail
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import generics
 
 from .serializers import ContatoSerializer, SBPJorUserSerializer, FavoritoSerializer
@@ -40,6 +40,7 @@ class ContatoCreate(generics.CreateAPIView):
         return self.create(request, *args, **kwargs)
 
 class SBPJorUserCreate(generics.CreateAPIView):
+    permission_classes = (AllowAny,)
     queryset = SBPJorUser.objects.all()
     serializer_class = SBPJorUserSerializer
 
