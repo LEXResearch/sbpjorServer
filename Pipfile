@@ -17,6 +17,8 @@ django-heroku = "*"
 gunicorn = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
+django-cors-headers= "*"
+
 
 
 [dev-packages]
