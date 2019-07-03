@@ -25,7 +25,7 @@ class TrabalhoSerializer(serializers.ModelSerializer):
     # TODO: ADD FAVORITO FIELD TO JSON
     class Meta:
         model = Trabalho
-        fields = ('url', 'numero', 'evento', 'titulo', 'autores', 'favorito')
+        fields = ('url', 'numero', 'evento', 'titulo', 'autores', 'favorito', 'pk')
 
 class MesaSerializer(serializers.ModelSerializer):
     trabalhos = serializers.PrimaryKeyRelatedField(many=True, read_only=True)

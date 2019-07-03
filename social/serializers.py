@@ -12,21 +12,17 @@ class SBPJorUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SBPJorUser
-        fields = ('imei', 'username', 'password', 'nome', 'telefone', 'email', 'data_nascimento', 'pk', 'cpf', 'rg')
+        fields = ('imei', 'username', 'password', 'nome', 'telefone', 'email', 'data_nascimento', 'user', 'cpf', 'rg')
 
 class ContatoSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=SBPJorUser.objects.all())
-
     class Meta:
         model = Contato
-        fields = ('user', 'assunto', 'mensagem')
+        fields = ('assunto', 'mensagem')
 
 class FavoritoSerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=SBPJorUser.objects.all())
-
     trabalho = serializers.PrimaryKeyRelatedField(queryset=Trabalho.objects.all())
 
 
     class Meta:
         model = Favorito
-        fields = ('user', 'trabalho')
+        fields = ('trabalho',)

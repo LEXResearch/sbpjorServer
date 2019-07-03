@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from conteudo.models import Trabalho
@@ -17,7 +18,7 @@ class SBPJorUser(AbstractUser):
         return self.username
 
 class Favorito(models.Model):
-    user = models.ForeignKey(SBPJorUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     trabalho = models.ForeignKey(Trabalho, on_delete=models.CASCADE)
     data = models.DateField(auto_now_add=True)
 
@@ -25,7 +26,7 @@ class Favorito(models.Model):
         return self.user.username + " " + self.trabalho.titulo
 
 class Contato(models.Model):
-    user = models.ForeignKey(SBPJorUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     assunto = models.CharField(max_length=50)
     mensagem = models.TextField(max_length=5000)
     data = models.DateTimeField(auto_now=True)
