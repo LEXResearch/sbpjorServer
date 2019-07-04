@@ -12,7 +12,7 @@ class SBPJorUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SBPJorUser
-        fields = ('imei', 'username', 'password', 'nome', 'telefone', 'email', 'data_nascimento', 'user', 'cpf', 'rg')
+        fields = ('imei', 'username', 'password', 'nome', 'telefone', 'email', 'data_nascimento', 'cpf', 'rg')
 
 class ContatoSerializer(serializers.ModelSerializer):
     class Meta:
