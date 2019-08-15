@@ -29,7 +29,13 @@ class ContatoCreate(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         email_org(request)
-        return self.create(request, *args, **kwargs)
+
+        serializer = ContatoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class SBPJorUserCreate(generics.CreateAPIView):
     permission_classes = (AllowAny,)
@@ -58,3 +64,17 @@ class FavoritoDestroy(generics.DestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = Favorito.objects.all()
     serializer_class = FavoritoSerializer
+    #
+    # def get_queryset(self):
+    #
+    #     print(self.request.user.id)
+    #     print(self.kwargs['pk'])
+    #     print(queryset)
+    #     return queryset
+    #
+    # def delete(self, request, *args, **kwargs):
+    #     queryset = Favorito.objects.filter(user=self.request.user.id, trabalho=self.kwargs['pk'])[0]
+    #     instance = self.get_object()
+    #     print(instance)
+    #     print("surto")
+    #     self.perform_destroy(instance)

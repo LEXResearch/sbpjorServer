@@ -16,6 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.conf.urls import url, include
+from django.urls import path
 
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from rest_framework import routers
@@ -24,21 +25,21 @@ from conteudo.views import MesaList, TrabalhoList, CronogramaList
 from social.views import ContatoCreate, SBPJorUserCreate, SBPJorUserRetrieveUpdate, FavoritoCreate, FavoritoDestroy
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url(r'^api/login/', obtain_jwt_token),
-    url(r'^api/refresh-token/', refresh_jwt_token),
+    path('admin/', admin.site.urls),
+    path('api/login/', obtain_jwt_token),
+    path('api/refresh-token/', refresh_jwt_token),
 
     # social urls
-    url(r'^api/contato/', ContatoCreate.as_view(), name='contato-create'),
-    url(r'^api/favorito/', FavoritoCreate.as_view(), name='favorito-create'),
-    url(r'^api/favorito/<int:pk>/', FavoritoDestroy.as_view(), name='favorito-destroy'),
-    url(r'^api/register/', SBPJorUserCreate.as_view(), name='user-create'),
-    url(r'^api/user/<int:pk>/', SBPJorUserRetrieveUpdate.as_view(), name='user-update'),
+    path('api/contato/', ContatoCreate.as_view()),
+    path('api/favorito/<int:pk>/', FavoritoDestroy.as_view()),
+    path('api/favorito/', FavoritoCreate.as_view()),
+    path('api/register/', SBPJorUserCreate.as_view()),
+    path('api/user/<int:pk>/', SBPJorUserRetrieveUpdate.as_view()),
 
 
     # content urls
-    url(r'^api/mesa/', MesaList.as_view(), name='mesa-list'),
-    url(r'^api/trabalho/', TrabalhoList.as_view(), name='trabalho-list'),
-    url(r'^api/cronograma/', CronogramaList.as_view(), name='cronograma-list'),
+    path('api/mesa/', MesaList.as_view()),
+    path('api/trabalho/', TrabalhoList.as_view()),
+    path('api/cronograma/', CronogramaList.as_view()),
 
 ]

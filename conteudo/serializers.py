@@ -12,6 +12,7 @@ class CategoriaAtividadeSerializer(serializers.ModelSerializer):
 class TrabalhoSerializer(serializers.ModelSerializer):
     evento = serializers.StringRelatedField()
     favorito = serializers.SerializerMethodField('is_favorite')
+    mesa = serializers.PrimaryKeyRelatedField(read_only=True)
 
     def is_favorite(self, obj):
         user = self.context['request'].user
@@ -21,14 +22,15 @@ class TrabalhoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trabalho
-        fields = ('url', 'numero', 'evento', 'titulo', 'autores', 'favorito', 'pk')
+        fields = ('url', 'numero', 'evento', 'titulo', 'autores', 'favorito', 'pk', 'mesa')
 
 class MesaSerializer(serializers.ModelSerializer):
     trabalhos = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    atividade = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Mesa
-        fields = ('numero', 'titulo', 'coordenada', 'trabalhos', 'descricao')
+        fields = ('numero', 'titulo', 'coordenada', 'trabalhos', 'descricao', 'atividade')
 
 class AtividadeSerializer(serializers.ModelSerializer):
     mesas = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
